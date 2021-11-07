@@ -4,15 +4,25 @@ import Bouton from "./components/Bouton/Bouton";
 import Livres from "./containers/Livres/Livres"
 
 class App extends Component {
+  state={
+    AjoutLivre:false
+  }
+
+  handleClicAjoutLivre=()=>{
+    this.setState((oldState)=>{
+      return {AjoutLivre:!oldState.AjoutLivre};
+    })
+}
   render() {
     return (
       <div className="container">
         <TitreH1>Page listant les livres</TitreH1>
-        <Livres />
+        <Livres AjoutLivre={this.state.AjoutLivre}/>
         <Bouton 
           typeBtn="btn-success" 
           css="w-100" 
-          clic={() => console.log("Ajout")}>Ajouter
+          clic={this.handleClicAjoutLivre}>
+            {!this.state.AjoutLivre ?"Ajouter":"fermer l Ajout"}
         </Bouton>
       </div>
     );

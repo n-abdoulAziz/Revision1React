@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import FormulaireAjout from '../FormulaireAjout/FormulaireAjout';
 import Livre from "./Livre/Livre";
 
 class Livres extends Component {
@@ -20,36 +21,45 @@ class Livres extends Component {
         newLivres.splice(livreIndexTab,1);
         this.setState({livres:newLivres});
     }
+    handleAjoutLivre=(titre,auteur,nbPages)=>{
+        console.log(titre);
+        console.log(auteur);
+        console.log(nbPages);
+    }
     
     render() {
         return (
-            <table className="table text-center">
-                <thead>
-                    <tr className="table-dark">
-                        <th>Titre</th>
-                        <th>Auteur</th>
-                        <th>Nombre de pages</th>
-                        <th colSpan="2">Actions</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {
-                        this.state.livres.map(livre => {
-                            return (
-                               <tr key={livre.id}>
-                                    <Livre 
-                                        titre={livre.titre}
-                                        auteur={livre.auteur}
-                                        nbPages={livre.nbPages}
-                                        suppression={()=>this.handleSuppressionLivre(livre.id)}
-                                       
-                                    />
-                               </tr>
-                            );
-                        })
-                    }
-                </tbody>
-            </table>
+            <>
+                <table className="table text-center">
+                    <thead>
+                        <tr className="table-dark">
+                            <th>Titre</th>
+                            <th>Auteur</th>
+                            <th>Nombre de pages</th>
+                            <th colSpan="2">Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {
+                            this.state.livres.map(livre => {
+                                return (
+                                <tr key={livre.id}>
+                                        <Livre
+                                            titre={livre.titre}
+                                            auteur={livre.auteur}
+                                            nbPages={livre.nbPages}
+                                            suppression={()=>this.handleSuppressionLivre(livre.id)}
+                                        
+                                        />
+                                </tr>
+                                );
+                            })
+                        }
+                    </tbody>
+                </table>
+                {this.props.AjoutLivre && <FormulaireAjout validation={this.handleAjoutLivre}/>}
+
+            </>
         );
     }
 }
