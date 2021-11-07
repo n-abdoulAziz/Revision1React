@@ -7,7 +7,7 @@ class FormulaireAjout extends Component{
     state={
         titreSaisi:"",
         auteurSaisi:"",
-        nbPagesSaisi:""
+        nbPagesSaisi:"",
     }
     handleValidationForm=(event)=>{
         event.preventDefault();
